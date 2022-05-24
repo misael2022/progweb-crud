@@ -3,9 +3,9 @@
 
 require "conecta.php";
 
-function lerProdutos($conexao){
-    $sql = "SELECT produtos.id, produtos.nome AS produtos, produtos.quantidade, produtos.preco, produtos.descricao, fabricantes.nome AS fabricante FROM produtos INNER JOIN fabricantes
-    ON produtos.fabricante_id = fabricante.id ORDER BY produto";
+function lerUmProdutos($conexao){
+    $sql = "SELECT produtos.id, produtos.nome AS produtos, produtos.quantidade, produtos.preco, produtos.descricao, fabricante.nome AS fabricante FROM produtos INNER JOIN fabricantes
+    ON produtos.fabricante_id = fabricantes.id ORDER BY produto";
 
     $resultado = mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
 
@@ -18,7 +18,8 @@ function lerProdutos($conexao){
     return $produtos;    
 }
 
-function inserirProduto($conexao, $nome){
+function inserirProduto($conexao, $nome, $preco, $quantidade, $descricao, $fabricanteId){
+    $sql = "INSERT INTO produtos(nome, preco, quantidade, descricao, fabricante_id) VALUE('$nome', '$preco', '$quantidade', '$descricao', $fabricanteId)";
     
     mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
 }
@@ -38,13 +39,13 @@ function lerUmFabricante($conexao, $id){
 
 
 
-function atualizarFabricante($conexao, $id, $nome){
+function atualizarProduto($conexao, $id, $nome){
     $sql = "UPDATE fabricantes SET nome = '$nome' WHERE id = $id";
     mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
 } // final atualizarFabricante
 
 
-function excluirFabricante($conexao, $id) {
+function excluirProduto ($conexao, $id) {
     $sql = "DELETE FROM fabricantes WHERE id = $id";
     mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
 }
