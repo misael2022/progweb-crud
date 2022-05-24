@@ -1,3 +1,7 @@
+<?php
+require "../includes/funcoes-fabricantes.php";
+$listaDeFabricantes = lerFabricantes($conexao);
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -23,7 +27,6 @@
         <caption> Lista de Fabricantes </caption>
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Nome</th>
                 <th>Operação</th>
             </tr>
@@ -31,7 +34,22 @@
                 
         <tbody>
 
+<?php 
+$contador = 1;
+foreach( $listaDeFabricantes as $fabricante ){ ?>        
+            <tr>
+                <td> <?=$contador.": ". $fabricante["nome"]?> </td>
+                <td> 
+<a href="atualizar.php?id=<?=$fabricante["id"]?>">Atualizar</a> 
+- <a href="excluir.php?id=<?=$fabricante["id"]?>">Excluir</a>
+                </td>
+            </tr> 
+<?php 
+$contador++;
+} 
 
+require "../includes/desconecta.php"; // opcional
+?>
 
         </tbody>
 
