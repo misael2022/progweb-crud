@@ -56,5 +56,3 @@ function excluirFabricante($conexao, $id) {
     $sql = "DELETE FROM fabricantes WHERE id = $id";
     mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
 }
-
-
