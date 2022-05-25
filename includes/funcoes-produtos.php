@@ -39,8 +39,10 @@ function lerUmFabricante($conexao, $id){
 
 
 
-function atualizarProduto($conexao, $id, $nome){
-    $sql = "UPDATE fabricantes SET nome = '$nome' WHERE id = $id";
+function atualizarProduto($conexao, $id, $nome, $preco, $quantidade, $descricao, $fabId){
+    $sql = "UPDATE produtos SET nome = '$nome', preco = $preco, quantidade = $quantidade, descricao = '$descricao',
+    fabricante_id = $fabId
+    WHERE id = $id";
     mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
 } // final atualizarFabricante
 
